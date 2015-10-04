@@ -301,7 +301,7 @@ namespace WpfApplication1
             matrix.Initialize(2);
             CreateTextBoxes(matrix, wrapPanel1,ref textBoxDimB);
         }
-        // hi there hi there!
+       //NIce
         public void button1_Click(object sender, RoutedEventArgs e)
         {
             wrapPanel.Children.Clear();
