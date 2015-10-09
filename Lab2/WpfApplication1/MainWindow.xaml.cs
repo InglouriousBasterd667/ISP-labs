@@ -292,16 +292,16 @@ namespace WpfApplication1
             e.Handled = !IsTextAllowed(e.Text);
         }
 
-       
+
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             wrapPanel1.Children.Clear();
             Matrix matrix = new Matrix(Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text));
             matrix.Initialize(2);
-            CreateTextBoxes(matrix, wrapPanel1,ref textBoxDimB);
+            CreateTextBoxes(matrix, wrapPanel1, ref textBoxDimB);
         }
-       //NIce
+
         public void button1_Click(object sender, RoutedEventArgs e)
         {
             wrapPanel.Children.Clear();
