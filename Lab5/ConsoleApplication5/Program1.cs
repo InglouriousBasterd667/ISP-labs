@@ -20,7 +20,7 @@ namespace WpfApplication1
           System.Runtime.Serialization.StreamingContext context) : base(info, context)
         { }
     }
-
+    [Serializable]
     public class Vector:IComparable<Vector>
     {
         public int length;
@@ -152,13 +152,13 @@ namespace WpfApplication1
         }
 
     }
+    [Serializable]
     public class Matrix : IEnumerable<Vector>
     {
         public int rows;
         public int columns;
         public Vector[] matrix;
         public int rowIndex { get; set; }
-        public int size;
         public Matrix(int rows, int columns)
         {
             this.rows = rows;

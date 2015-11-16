@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="XmlSerializationTag.cs" />
+    <Compile Include="Program1.cs" />
     <Compile Include="XML.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMLSerialize.cs" />

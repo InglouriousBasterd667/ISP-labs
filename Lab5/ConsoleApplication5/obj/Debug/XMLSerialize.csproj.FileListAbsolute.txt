@@ -1,0 +1,6 @@
+\\psf\Home\Documents\GitHubVisualStudio\ISP-labs\Lab5\ConsoleApplication5\bin\Debug\ConsoleApplication5.exe.config
+\\psf\Home\Documents\GitHubVisualStudio\ISP-labs\Lab5\ConsoleApplication5\bin\Debug\ConsoleApplication5.exe
+\\psf\Home\Documents\GitHubVisualStudio\ISP-labs\Lab5\ConsoleApplication5\bin\Debug\ConsoleApplication5.pdb
+\\psf\Home\Documents\GitHubVisualStudio\ISP-labs\Lab5\ConsoleApplication5\obj\Debug\XMLSerialize.csprojResolveAssemblyReference.cache
+\\psf\Home\Documents\GitHubVisualStudio\ISP-labs\Lab5\ConsoleApplication5\obj\Debug\ConsoleApplication5.exe
+\\psf\Home\Documents\GitHubVisualStudio\ISP-labs\Lab5\ConsoleApplication5\obj\Debug\ConsoleApplication5.pdb
