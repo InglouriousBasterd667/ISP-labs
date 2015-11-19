@@ -35,10 +35,12 @@
         <RadioButton x:Name="radioButton1" Content="Text" HorizontalAlignment="Left" Margin="686,220,0,0" VerticalAlignment="Top"/>
         <Button x:Name="buttonSaveToFile" Content="Save to file" HorizontalAlignment="Left" Margin="686,304,0,0" VerticalAlignment="Top" Width="80" Click="buttonSaveToFile_Click"/>
         <Button x:Name="buttonReadFile" Content="Load from file" HorizontalAlignment="Left" Margin="686,329,0,0" VerticalAlignment="Top" Width="80" Click="buttonReadFile_Click"/>
-        <Button x:Name="buttonLinq" Content="Button" HorizontalAlignment="Left" Margin="965,588,0,0" VerticalAlignment="Top" Width="75" Click="buttonLinq_Click"/>
+        <Button x:Name="buttonLinq" Content="Show vectors" HorizontalAlignment="Left" Margin="933,566,0,0" VerticalAlignment="Top" Width="138" Click="buttonLinq_Click" Height="30"/>
         <WrapPanel Name ="SortedMatrixPanel" HorizontalAlignment="Left" Height="100" Margin="1218,220,0,0" VerticalAlignment="Top" Width="100"/>
         <TextBox x:Name="minimumLength" Text="10" HorizontalAlignment="Left" Height="23" Margin="965,622,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="75"/>
         <WrapPanel Name ="groupedMatrix" HorizontalAlignment="Left" Height="100" Margin="1250,682,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="Serialize" Content="Serialize" HorizontalAlignment="Left" Margin="254,741,0,0" VerticalAlignment="Top" Width="75" Height="35" Click="Serialize_Click"/>
+        <Button x:Name="DeSerialize" Content="Deserialize" HorizontalAlignment="Left" Margin="466,741,0,0" VerticalAlignment="Top" Width="75" Height="35" Click="DeSerialize_Click"/>
 
 
 

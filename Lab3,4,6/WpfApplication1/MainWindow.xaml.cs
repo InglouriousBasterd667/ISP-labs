@@ -19,7 +19,6 @@ using System.IO.Compression;
 using Microsoft.Win32;
 
 
-
 namespace WpfApplication1
 {
   
@@ -27,14 +26,15 @@ namespace WpfApplication1
 
     public partial class MainWindow : Window
     {
-        
 
+        const string WAY  = "C:\\matrix.xml";
         Cells[,] cellsDimA = new Cells[10, 10];
         Cells[,] cellsDimB = new Cells[10, 10];
         TextBox[,] textBoxDimA = new TextBox[10, 10];
         TextBox[,] textBoxDimB = new TextBox[10, 10];
         TextBlock[,] textBoxDimR = new TextBlock[10, 10];
         Matrix result;
+        Serializer serializer = new Serializer();
         bool sign = false;
         public MainWindow()
         {
@@ -220,7 +220,7 @@ namespace WpfApplication1
             
             result = matrixA * matrixB;
             result.FindLengthOfVectors();
-            var sortedMatrix = result.OrderBy(vect => vect.mathLength);
+            var sortedMatrix = result.OrderBy(vect => vect.mathLength); // sort
             CreateTextBlockses(result, wrapPanel2, ref textBoxDimR);
             Matrix temp= new Matrix(result.rows,result.columns);
             int count = 0;
@@ -446,6 +446,21 @@ namespace WpfApplication1
             }
             CreateTextBlockses(temp, groupedMatrix, ref textBoxDimR);
             Vector vector = result.Max<Vector>();
+        }
+
+        private void Serialize_Click(object sender, RoutedEventArgs e)
+        {
+            Dictionary<string, List<int>> dict = new Dictionary<string, List<int>>();
+            List<int> list = new List<int>();
+            list.Add(1);
+            list.Add(2);
+            dict.Add("one", list);
+            serializer.WriteObject(list, WAY);   
+        }
+
+        private void DeSerialize_Click(object sender, RoutedEventArgs e)
+        {
+            var a = serializer.ReadObject(WAY);
         }
     }
 }

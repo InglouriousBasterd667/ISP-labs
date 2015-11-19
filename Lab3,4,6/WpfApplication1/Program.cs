@@ -157,13 +157,13 @@ namespace WpfApplication1
         public int rows;
         public int columns;
         public Vector[] matrix;
-        public int rowIndex { get; set; }
+       // public int rowIndex { get; set; }
         public int size;
         public Matrix(int rows, int columns)
         {
             this.rows = rows;
             this.columns = columns;
-            rowIndex = -1;
+      //      rowIndex = -1;
             matrix = new Vector[rows];
             for (int i = 0; i < rows; i++)
             {
@@ -256,14 +256,14 @@ namespace WpfApplication1
         }
         
         
-        public Vector Current
-        {
-            get { return matrix[rowIndex]; }
-        }
-        public void Reset()
-        {
-            rowIndex = -1;
-        }
+        //public Vector Current
+        //{
+        //    get { return matrix[rowIndex]; }
+        //}
+        //public void Reset()
+        //{
+        //    rowIndex = -1;
+        //}
         public IEnumerator<Vector> GetEnumerator()
         {
             for (int i = 0; i < rows; i++)
