@@ -1,0 +1,39 @@
+﻿<Window x:Class="Player.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:metro="http://schemas.codeplex.com/elysium/theme"
+        xmlns:viewModel="clr-namespace:Player.ViewModels"
+        xmlns:view ="clr-namespace:Player.View"
+        x:Name="PlayerMainWindow"
+        DataContext="{Binding ViewModel,ElementName=PlayerMainWindow}"
+        mc:Ignorable="d"
+        Title="MEGAPLAYER " Height="471.179" Width="638.444" Background="#FFDF8600">
+    <Window.Resources>
+        <viewModel:BaseViewModel
+        x:Key="tabs" 
+        Header="asdf"/>
+    </Window.Resources>
+
+    <Grid Margin="0,0,-0.429,-1.143" Background="#FF2B2B2B">
+        <TabControl Name="tabcontrol0" ItemsSource="{Binding Path=ViewModels}" Margin="10" Background="#FF2B2B2B">
+            <TabControl.Resources>
+                <DataTemplate DataType="{x:Type viewModel:CompositionLoader}">
+                    <view:CompositionView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModel:PlayListViewModel}">
+                    <view:PlayListView/>
+                </DataTemplate>
+            </TabControl.Resources>
+            
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <TextBlock Text="{Binding Path=Header}"/>
+                    </DockPanel>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+        </TabControl>
+    </Grid>
+</Window>

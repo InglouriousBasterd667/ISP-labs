@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Player.View.PlayListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Player.View"
+             xmlns:list="clr-namespace:Player"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Margin="0,0,-129,0">
+        <list:CustomListView 
+                  ItemsSource="{Binding Path=PlayList,UpdateSourceTrigger=PropertyChanged}"
+                  SelectionMode ="Extended" SelectedItemsList="{Binding SelectedModels, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="19,-1,15,78" RenderTransformOrigin="0.5,0.5" Background="#FF29292A" Foreground="#FFF39F13" FontFamily="Comic Sans MS">
+            <list:CustomListView.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.394"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </list:CustomListView.RenderTransform>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ID}">ID</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Title}">Title</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Artist}">Artist</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Genre}">Genre</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Rating}">Rating</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Length}">Length</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </list:CustomListView>
+        <Button x:Name="play" Content="{Binding PlayButtonContent,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="83,238,0,0" IsEnabled="{Binding ButtonEnabled}"  Command="{Binding PlayCommand}" VerticalAlignment="Top" Width="75" Foreground="#FFE2A90E" Background="Black"/>
+        <ProgressBar x:Name="progress"  Value="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum ="0" Maximum ="{Binding Maximum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Margin="24,271,0,0" VerticalAlignment="Top" Width="395" Height="19" Foreground="#FFEEB10B" Background="#FF2D2C2C"/>
+        <Button x:Name="stop" Content="Stop" HorizontalAlignment="Left" Command="{Binding StopCommand}"  Margin="180,238,0,0" VerticalAlignment="Top" Width="75" Foreground="#FFE2A90E" Background="Black"/>
+    </Grid>
+</UserControl>

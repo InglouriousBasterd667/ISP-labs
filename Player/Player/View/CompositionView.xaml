@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="Player.View.CompositionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Player.View"
+             xmlns:list="clr-namespace:Player"
+             mc:Ignorable="d" Height="348.001" Width="462.487"
+             >
+    <Grid Margin="0,0,-61.714,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width ="125"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="gridOfButtons" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="textBoxCompID" Grid.Row="0" Text="{Binding txtID, Mode = TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" Margin="0,25,0,0" Foreground="White" Background="#FF323232"/>
+            <TextBox x:Name="textboxCompArtist" Grid.Row="1" HorizontalAlignment="Left" Height="25" Margin="0,20,0,0" TextWrapping="Wrap" Text="{Binding txtArtist, Mode = TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="125" Foreground="White" Background="#FF323232"/>
+            <TextBox x:Name="textboxCompTitle" Grid.Row="2" HorizontalAlignment="Left" Height="25" Margin="0,20,0,0" TextWrapping="Wrap" Text="{Binding txtTitle, Mode = TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="125" Foreground="White" Background="#FF323232"/>
+            <TextBox x:Name="textboxCompLength" Grid.Row="3" HorizontalAlignment="Left" Height="25" Margin="0,20,0,0" TextWrapping="Wrap" Text="{Binding txtLength, Mode = TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="125" Foreground="White" Background="#FF323232"/>
+            <TextBox x:Name="textboxCompRating" Grid.Row="4" HorizontalAlignment="Left" Height="25" Margin="0,25,0,0" TextWrapping="Wrap" Text="{Binding txtRating, Mode= TwoWay,UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Top" Width="125" Foreground="White" Background="#FF323232"/>
+            <TextBox x:Name="TextBoxGenre" Grid.Row="5" HorizontalAlignment="Left" Height="25" Margin="0,20,0,0" TextWrapping="Wrap" Text="{Binding txtGenre,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="125" Foreground="White" Background="#FF323232"/>
+            <Button x:Name="addComposition" Grid.Row="6" Content="Add Composition" HorizontalAlignment="Left" VerticalAlignment="Top" Command ="{Binding AddCommand}" Width="125" Background="Black" Foreground="#FFE79426" FontFamily="Comic Sans MS"/>
+            <Button x:Name="deleteComposition" Content="Delete Composition" HorizontalAlignment="Left" Margin="0,23.429,0,0" Grid.Row="6" VerticalAlignment="Top" Command="{Binding DeleteCommand}" Width="125" Height="24" Foreground="#FFE79426" BorderBrush="#FF2C2C2C" Background="#FF060606" FontFamily="Comic Sans MS"/>
+            <Label x:Name="label" Content="ID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="23" Margin="3,2,0,0" Foreground="#FFDF8F23" FontFamily="Comic Sans MS"/>
+            <Label x:Name="label1" Content="Artist" HorizontalAlignment="Left" Margin="0,48,0,0" VerticalAlignment="Top" Grid.RowSpan="2" Foreground="#FFDF8F23" FontFamily="Comic Sans MS"/>
+            <Label x:Name="label2" Content="Title" HorizontalAlignment="Left" Height="26" Margin="0,44.714,0,0" Grid.Row="1" VerticalAlignment="Top" Width="48" Grid.RowSpan="2" Foreground="#FFDF8F23" FontFamily="Comic Sans MS"/>
+            <Label x:Name="label3" Content="Length" HorizontalAlignment="Left" Margin="0,43.714,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.RowSpan="2" Foreground="#FFDF8F23" FontFamily="Comic Sans MS"/>
+            <Label x:Name="label4" Content="Rating" HorizontalAlignment="Left" Margin="0,48.714,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.RowSpan="2" Foreground="#FFDF8F23" FontFamily="Comic Sans MS"/>
+            <Label x:Name="label5" Content="Genre" HorizontalAlignment="Left" Margin="1,45.714,0,0" Grid.Row="4" VerticalAlignment="Top" Height="24" Width="46" Grid.RowSpan="2" Foreground="#FFDF8F23" FontFamily="Comic Sans MS"/>
+
+
+
+        </Grid>
+        <list:CustomListView
+                  ItemsSource="{Binding Path=Library,UpdateSourceTrigger=PropertyChanged}"
+                  SelectionMode ="Extended" SelectedItemsList="{Binding SelectedModels, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.ColumnSpan="2" Margin="125,0,167,0" Background="#FF2C2C2C" Foreground="#FFEB8A15">
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ID}">ID</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Title}">Title</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Artist}">Artist</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Genre}">Genre</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Rating}">Rating</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Length}">Length</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </list:CustomListView>
+        <Button x:Name="button" Content="CreatePlaylist" Grid.Column="1" HorizontalAlignment="Left" Margin="236.857,127,0,0" Command="{Binding AddPlayListCommand}" VerticalAlignment="Top" Width="120" FontFamily="Comic Sans MS" Foreground="#FFE79426" Background="#FF020202"/>
+        <TextBox x:Name="textboxPlayListID" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="236.857,27,0,0" TextWrapping="Wrap" Text="{Binding ID,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Background="#FF2C2C2C" Foreground="White"/>
+        <TextBox x:Name="textBox1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="236.857,78,0,0" TextWrapping="Wrap" Text="{Binding Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Background="#FF2C2C2C" Foreground="White"/>
+    </Grid>
+</UserControl>
