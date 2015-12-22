@@ -22,6 +22,7 @@ using Microsoft.Win32;
 namespace WpfApplication1
 {
   
+ 
 
 
     public partial class MainWindow : Window
@@ -35,7 +36,9 @@ namespace WpfApplication1
         TextBlock[,] textBoxDimR = new TextBlock[10, 10];
         Matrix result;
         Serializer serializer = new Serializer();
-        bool sign = false;
+        bool act = false;
+        string filename;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -148,14 +151,14 @@ namespace WpfApplication1
         private void button2_Click(object sender, RoutedEventArgs e)
         {
 
-            sign = true;
+            
             button3.Background = Brushes.Red;
             button2.Background = Brushes.Green;
-            Addition();
+         
         }
         private void button3_Click(object sender, RoutedEventArgs e)
         {
-            sign = false;
+            act = false;
             button3.Background = Brushes.Green;
             button2.Background = Brushes.Red;
             Multiplication();
@@ -235,7 +238,7 @@ namespace WpfApplication1
 
         private void doAction()
         {
-            if (sign)
+            if (act)
                 Addition();
             else
                 Multiplication();
@@ -261,8 +264,18 @@ namespace WpfApplication1
         {
             doAction();
         }
-        
-        private void buttonSaveToFile_Click(object sender, RoutedEventArgs e)
+        private void SaveAs()
+        {
+             SaveFileDialog fileDialog = new SaveFileDialog();
+                fileDialog.DefaultExt = ".txt";
+                fileDialog.Filter = "Text files (txt)|*.txt";
+                if (fileDialog.ShowDialog() == true)
+                    filename = fileDialog.FileName;
+                else
+                    return;
+                Save();
+        }
+        private void Save()
         {
             Matrix matrixA = new Matrix(Convert.ToInt32(textBox.Text), Convert.ToInt32(textBox1.Text));
             for (int i = 0; i < matrixA.rows; i++)
@@ -281,16 +294,7 @@ namespace WpfApplication1
                     matrixB[i, j] = cellsDimB[i, j].value;
                 }
             }
-            if ((bool)radioButton1.IsChecked)
-            {
-                SaveFileDialog fileDialog = new SaveFileDialog();
-                string filename;
-                fileDialog.DefaultExt = ".txt";
-                fileDialog.Filter = "Text files (txt)|*.txt";
-                if (fileDialog.ShowDialog() == true)
-                    filename = fileDialog.FileName;
-                else
-                    return;
+               
                 FileStream fileStream;
                 if (!File.Exists(filename))
                     fileStream = new FileStream(filename, FileMode.CreateNew);
@@ -303,7 +307,6 @@ namespace WpfApplication1
                 streamWriter.WriteLine(matrixA.columns);
                 foreach (Vector vect in matrixA)
                 {
-                    vect[0] = 1.5;
                     streamWriter.WriteLine(vect);
                 }
 
@@ -315,55 +318,11 @@ namespace WpfApplication1
                 }
                 streamWriter.Close();
                 fileStream.Close();
-            }
-
-            if ((bool)radioButton2.IsChecked)
-            {
-                SaveFileDialog fileDialog = new SaveFileDialog();
-                string filename;
-                fileDialog.DefaultExt = ".data";
-                fileDialog.Filter = "Binary files (data)|*.data";
-                              
-                if (fileDialog.ShowDialog() == true)
-                    filename = fileDialog.FileName;
-                else
-                    return;
-
-                FileStream fileStream = new FileStream(filename, FileMode.CreateNew);
-                DeflateStream deflateStream = new DeflateStream(fileStream, CompressionMode.Compress);
-                BinaryWriter bw = new BinaryWriter(deflateStream);
-                bw.Write(matrixA.rows);
-                bw.Write(matrixA.columns);
-                foreach (Vector vect in matrixA)
-                { 
-                    for (int j = 0; j < matrixA.columns; j++)
-                    {
-                        bw.Write(vect[j]);
-                    }
-                    
-                }
-                bw.Write(matrixB.rows);
-                bw.Write(matrixB.columns);
-                foreach (Vector vect in matrixB)
-                {
-                    for (int j = 0; j < matrixB.columns; j++)
-                    {
-                        bw.Write(vect[j]);
-                    }
-                }
-                bw.Close();
-                deflateStream.Close();
-                fileStream.Close();
-                
-            }
         }
 
-        private void buttonReadFile_Click(object sender, RoutedEventArgs e)
+        private void ReadFile()
         {
-            if ((bool)radioButton1.IsChecked)
-            {
                 FileDialog fileDialog = new OpenFileDialog();
-                string filename;
                 fileDialog.DefaultExt = ".txt";
                 fileDialog.Filter = "Text documents (txt)|*.txt";
                 if (fileDialog.ShowDialog() == true)
@@ -391,45 +350,6 @@ namespace WpfApplication1
                 CreateTextBoxes(matrixB, wrapPanel1, ref textBoxDimB, ref cellsDimB);
                 sr.Close();
                 fileStream.Close();
-            }
-            if ((bool)radioButton2.IsChecked)
-            {
-                OpenFileDialog fileDialog = new OpenFileDialog();
-                string filename;
-                fileDialog.DefaultExt = ".data";
-                fileDialog.Filter = "Text documents (data)|*.data";
-                if (fileDialog.ShowDialog() == true)
-                    filename = fileDialog.FileName;
-                else
-                    return;
-                FileStream fileStream = new FileStream(filename, FileMode.Open);
-                DeflateStream deflateStream = new DeflateStream(fileStream, CompressionMode.Decompress);
-                BinaryReader binaryReader = new BinaryReader(deflateStream);
-                Matrix matrixA = new Matrix(binaryReader.ReadInt32(), binaryReader.ReadInt32());
-                textBox.Text = Convert.ToString(matrixA.rows);
-                textBox1.Text = Convert.ToString(matrixA.columns);
-                foreach (Vector vect in matrixA)
-                {
-                    for (int i = 0; i < matrixA.columns; i++)
-                    {
-                        vect[i] = binaryReader.ReadDouble();
-                    }
-                }
-                Matrix matrixB = new Matrix(binaryReader.ReadInt32(), binaryReader.ReadInt32());
-                textBox2.Text = Convert.ToString(matrixB.rows);
-                textBox3.Text = Convert.ToString(matrixB.columns);
-                foreach (Vector vect in matrixB)
-                {
-                    for (int i = 0; i < matrixB.columns; i++)
-                    {
-                        vect[i] = binaryReader.ReadDouble();
-                    }
-                }
-                CreateTextBoxes(matrixA, wrapPanel, ref textBoxDimA, ref cellsDimA);
-                CreateTextBoxes(matrixB, wrapPanel1, ref textBoxDimB, ref cellsDimB);
-
-            }
-
         }
 
         private void buttonLinq_Click(object sender, RoutedEventArgs e)
@@ -461,6 +381,55 @@ namespace WpfApplication1
         private void DeSerialize_Click(object sender, RoutedEventArgs e)
         {
             var a = serializer.ReadObject(WAY);
+        }
+        private void ClearMatrix()
+        {
+            wrapPanel2.Children.Clear();
+            wrapPanel.Children.Clear();
+            wrapPanel1.Children.Clear();
+        }
+        private void menuItemNew_Click(object sender, RoutedEventArgs e)
+        {
+            ClearMatrix();
+            button1.Visibility = Visibility.Visible;
+            button.Visibility = Visibility.Visible;
+            textBox.Visibility = Visibility.Visible;
+            textBox1.Visibility = Visibility.Visible;
+            textBox2.Visibility = Visibility.Visible;
+            textBox3.Visibility = Visibility.Visible;
+        }
+
+        private void menuItemOpen_Click(object sender, RoutedEventArgs e)
+        {
+            ReadFile();
+        }
+
+        private void menuItemSaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            SaveAs();
+        }
+
+        private void menuItemSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (filename == "")
+            {
+                SaveAs();
+            }
+            else
+            {
+                Save();
+            }
+        }
+
+        private void menuItemExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void menuItemAdd_Click(object sender, RoutedEventArgs e)
+        {
+            act = true;
+            Addition();
         }
     }
 }
